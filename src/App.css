@@ -8,6 +8,7 @@
   place-items: center;
   height: 100vh;
   background: lightblue;
+  overflow: hidden;
 }
 
 .app__body{
@@ -17,4 +18,5 @@
   height: 90vh;
   width: 90vw;
   margin-top: -50px;
+  
 }
