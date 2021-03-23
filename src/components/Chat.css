@@ -26,7 +26,7 @@
 }
 
 .chat__headerRight{
-  background: lightseagreen;
+  background: #ededed;
   display: flex;
   justify-content: space-between;
 }

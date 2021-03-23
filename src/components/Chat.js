@@ -6,9 +6,18 @@ import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 import MoreVertOutlinedIcon from '@material-ui/icons/MoreVertOutlined';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import MicIcon from '@material-ui/icons/Mic';
+import { useParams } from "react-router-dom";
+import db from "../firebase"
 
 const Chat = () => {
 const [input, setInput] =useState("")
+const { roomId } = useParams()
+ const [seed, setSeed] = useState("")
+ const [roomName, setRoomName] = useState("")
+
+  useEffect(() => {
+      setSeed(Math.floor(Math.random() * 5000))
+  }, [])
 
 const sendMessage = (e) => {
   e.preventDefault()
@@ -16,12 +25,20 @@ const sendMessage = (e) => {
   console.log('You type, >>>>', input)
 }
 
+useEffect(() => {
+if(roomId){
+  db.collection('rooms').doc(roomId).onSnapshot((snapshot) => {
+    setRoomName(snapshot.data().name)
+  })
+}
+},[roomId])
+
   return (
     <div className="chat">
       <div className="chat__header">
-        <Avatar />
+        <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`} />
         <div className="chat__headerInfo">
-          <h3>Room name</h3>
+          <h3>{roomName}</h3>
           <p>Last seen at ...</p>
         </div>
         <div className="chat__headerRight">
